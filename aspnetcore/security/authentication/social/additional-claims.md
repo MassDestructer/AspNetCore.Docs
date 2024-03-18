@@ -6,7 +6,6 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2021
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: security/authentication/social/additional-claims
 ---
 # Persist additional claims and tokens from external providers in ASP.NET Core
@@ -30,7 +29,7 @@ The OAuth authentication provider establishes a trust relationship with an app u
 * [Other authentication providers](xref:security/authentication/otherlogins)
 * [OpenIdConnect](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)
 
-Optional claims sent in the ID or access token from the authentication provider are usually configured in the provider's online portal. For example, Microsoft Azure Active Directory (AAD) permits assigning optional claims to the app's ID token in the app registration's **Token configuration** blade. For more information, see [How to: Provide optional claims to your app (Azure documentation)](/azure/active-directory/develop/active-directory-optional-claims). For other providers, consult their external documentation sets.
+Optional claims sent in the ID or access token from the authentication provider are usually configured in the provider's online portal. For example, Microsoft Entra ID permits assigning optional claims to the app's ID token in the app registration's **Token configuration** blade. For more information, see [How to: Provide optional claims to your app (Azure documentation)](/azure/active-directory/develop/active-directory-optional-claims). For other providers, consult their external documentation sets.
 
 The sample app configures the Google authentication provider with a client ID and client secret provided by Google:
 
@@ -63,7 +62,7 @@ The sample app creates locale (`urn:google:locale`) and picture (`urn:google:pic
 
 In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>. During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.
 
-In the sample app, `OnPostConfirmationAsync` (*Account/ExternalLogin.cshtml.cs*) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
+In the sample app, `OnPostConfirmationAsync` (`Account/ExternalLogin.cshtml.cs`) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
 
 [!code-csharp[](additional-claims/samples/6.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=27-47)]
 
@@ -87,12 +86,12 @@ The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNe
 
 When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.
 
-The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs*:
+The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in `Account/ExternalLogin.cshtml.cs`:
 
-[!code-csharp[](additional-claims/samples/6.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=49-53)]
+[!code-csharp[](additional-claims/samples/6.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=49-53,73)]
 
 > [!NOTE]
-> For information on passing tokens to the Razor components of a Blazor Server app, see <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+> For information on passing tokens to the Razor components of a server-side Blazor app, see <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-server-side-blazor-app>.
 
 ## How to add additional custom tokens
 
@@ -198,7 +197,7 @@ The OAuth authentication provider establishes a trust relationship with an app u
 * [Other authentication providers](xref:security/authentication/otherlogins)
 * [OpenIdConnect](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)
 
-Optional claims sent in the ID or access token from the authentication provider are usually configured in the provider's online portal. For example, Microsoft Azure Active Directory (AAD) permits you to assign optional claims to the app's ID token in the app registration's **Token configuration** blade. For more information, see [How to: Provide optional claims to your app (Azure documentation)](/azure/active-directory/develop/active-directory-optional-claims). For other providers, consult their external documentation sets.
+Optional claims sent in the ID or access token from the authentication provider are usually configured in the provider's online portal. For example, Microsoft Entra ID permits you to assign optional claims to the app's ID token in the app registration's **Token configuration** blade. For more information, see [How to: Provide optional claims to your app (Azure documentation)](/azure/active-directory/develop/active-directory-optional-claims). For other providers, consult their external documentation sets.
 
 The sample app configures the Google authentication provider with a client ID and client secret provided by Google:
 
@@ -231,7 +230,7 @@ The sample app creates locale (`urn:google:locale`) and picture (`urn:google:pic
 
 In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>. During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.
 
-In the sample app, `OnPostConfirmationAsync` (*Account/ExternalLogin.cshtml.cs*) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
+In the sample app, `OnPostConfirmationAsync` (`Account/ExternalLogin.cshtml.cs`) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -255,12 +254,12 @@ The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNe
 
 When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.
 
-The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs*:
+The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in `Account/ExternalLogin.cshtml.cs`:
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
 > [!NOTE]
-> For information on passing tokens to the Razor components of a Blazor Server app, see <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+> For information on passing tokens to the Razor components of a server-side Blazor app, see <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-server-side-blazor-app>.
 
 ## How to add additional custom tokens
 
@@ -499,7 +498,7 @@ The sample app creates locale (`urn:google:locale`) and picture (`urn:google:pic
 
 In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>. During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.
 
-In the sample app, `OnPostConfirmationAsync` (*Account/ExternalLogin.cshtml.cs*) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
+In the sample app, `OnPostConfirmationAsync` (`Account/ExternalLogin.cshtml.cs`) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
@@ -523,7 +522,7 @@ The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNe
 
 When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.
 
-The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs*:
+The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in `Account/ExternalLogin.cshtml.cs`:
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 

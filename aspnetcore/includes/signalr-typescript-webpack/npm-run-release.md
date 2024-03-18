@@ -1,6 +1,3 @@
----
-no-loc: ["Blazor Hybrid", Home, Privacy, Kestrel, appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
----
 ```console
 npm run release
 ```
@@ -15,4 +12,4 @@ Webpack completed the following tasks:
 * Copied the processed JavaScript, CSS, and HTML files from `src` to the `wwwroot` directory.
 * Injected the following elements into the `wwwroot/index.html` file:
   * A `<link>` tag, referencing the `wwwroot/main.<hash>.css` file. This tag is placed immediately before the closing `</head>` tag.
-  * A `<script>` tag, referencing the minified `wwwroot/main.<hash>.js` file. This tag is placed immediately before the closing `</body>` tag.
+  * A `<script>` tag, referencing the minified `wwwroot/main.<hash>.js` file. This tag is placed immediately after the closing `</title>` tag.
